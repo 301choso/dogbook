@@ -20,7 +20,8 @@ spring:
   # 데이터베이스 접속 정보
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dogbook
+    #url: jdbc:mysql://localhost:3306/dogbook
+    username: ${database.username}
     password: ${database.password}
   # 첨부파일
   file-upload:
