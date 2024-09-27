@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.db.dogbook.book.mapper.BookMapper">
+    <resultMap id="BookInfoVO" type="com.db.dogbook.book.model.BookInfoVO">
+        <result property="biIdx" column="BI_IDX"/>
+        <result property="name" column="BI_NAME"/>
+        <result property="price" column="BI_PRICE"/>
+        <result property="fileIdx" column="BI_FILE_IDX"/>
+        <result property="thumbIdx" column="BI_THUMB_IDX"/>
+        <result property="userIdx" column="BI_USER_IDX"/>
+        <result property="likeCnt" column="BI_LIKE_CNT"/>
+        <result property="categoryIdx" column="BI_CATEGORY_IDX"/>
+        <result property="blockAdIdx" column="BI_BLOCK_AD_IDX"/>
+        <result property="blockYn" column="BI_BLOCK_YN"/>
+        <result property="blockDt" column="BI_BLOCK_DT"/>
+        <result property="saveDt" column="BI_SAVE_DT"/>
+        <result property="updtDt" column="BI_UPDT_DT"/>
+    </resultMap>
+
+    <select id="getBookList" resultMap="BookInfoVO">
+        SELECT * FROM tb_book_info
+    </select>
+
+    <insert id="addBook">
+        INSERT INTO tb_book_info(
+            BI_NAME, BI_PRICE, BI_FILE_IDX, BI_THUMB_IDX, BI_USER_IDX, BI_LIKE_CNT,
+            BI_CATEGORY_IDX, BI_BLOCK_AD_IDX, BI_BLOCK_YN, BI_BLOCK_DT, BI_SAVE_DT)
+        VALUES(
+            #{name}, #{price}, #{fileIdx}, #{thumbIdx}, #{userIdx}, #{likeCnt},
+            #{categoryIdx}, #{blockAdIdx}, 'N', #{blockDt}, NOW())
+    </insert>
+
+    <update id="updtBook">
+        UPDATE tb_book_info
+        SET BI_NAME='', BI_PRICE=0, BI_FILE_IDX=0, BI_THUMB_IDX=0, BI_USER_IDX=0, BI_LIKE_CNT=0, BI_CATEGORY_IDX=0, BI_BLOCK_AD_IDX=0, BI_BLOCK_YN='N', BI_BLOCK_DT='', BI_SAVE_DT='', BI_UPDT_DT=''
+        WHERE BI_IDX = #{biIdx}
+    </update>
+
+    <delete id="delBook">
+        DELETE FROM tb_book_info WHERE BI_IDX = #{biIdx}
+    </delete>
+</mapper>

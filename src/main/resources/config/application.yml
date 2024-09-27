@@ -1,0 +1,32 @@
+spring:
+  servlet:
+    # 파일 최대 전송 용량 설정
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  logging:
+    pattern:
+      console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(---){faint} %clr(%-30.30logger{29}){cyan} %clr(:){faint} %m%n"
+      file: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(---){faint} %clr(%-30.30logger{29}){cyan} %clr(:){faint} %m%n"
+    level:
+      root: INFO
+      com.db: INFO
+      org.springframework.web: ERROR
+      com.zaxxer.hikari: WARN
+      jdbc: OFF
+      jdbc.sqltiming: INFO
+
+  # 데이터베이스 접속 정보
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dogbook
+    password: ${database.password}
+  # 첨부파일
+  file-upload:
+    path: ${file.upload.path}
+    access-file-extension: gif,jpg,jpeg,png
+server:
+  port: 8080
+
+
